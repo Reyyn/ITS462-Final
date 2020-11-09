@@ -29,7 +29,7 @@ namespace Election2k20_Project_ITS462 {
 		/// </summary>
 		/// <param name="databasePath">File path to the sqlite database.</param>
 		private DBAccess(string databasePath) {
-			Conn = new SqliteConnection(databasePath);
+			Conn = new SqliteConnection("Data Source=" + databasePath + ";");
 			Cmd = new SqliteCommand();
 			Cmd.Connection = Conn;
 		}

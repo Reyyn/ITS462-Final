@@ -74,7 +74,23 @@ namespace Election2k20_Project_ITS462
         static void Main(string[] args)
         {
             Webscrapper();
-            
+
+            /* TEST CODE FOR DBACCESS MODULE
+            DBAccess db = new DBAccess();
+            db.OpenConnection();
+            State state = new State("TEST");
+            state.Candidate1 = "Carrot";
+            state.Candidate2 = "Potato";
+            state.Winner = "Turnip";
+            state.Party1 = "Mario";
+            state.Party2 = "Peach";
+            state.Votes1 = 1234;
+            state.Votes2 = 4321;
+            state.Percent1 = 30.0f;
+            state.Percent2 = 60.0f;
+            db.StoreVotes(state);
+            db.CloseConnection();*/
+
             Console.ReadLine();
 
         }
