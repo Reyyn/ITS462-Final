@@ -73,7 +73,7 @@ namespace Election2k20_Project_ITS462 {
 					s.Votes1 = dr.GetInt32(6);
 					s.Votes1 = dr.GetInt32(7);
 					s.Percent1 = dr.GetFloat(8);
-					s.Percent1 = dr.GetFloat(9);
+					s.Percent2 = dr.GetFloat(9);
 				}
 				catch (Exception ex) {
 					s = null;
