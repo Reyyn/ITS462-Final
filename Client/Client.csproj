@@ -76,6 +76,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Election2k20_Project_ITS462\DBAccess.cs">
+      <Link>DBAccess.cs</Link>
+    </Compile>
+    <Compile Include="..\Election2k20_Project_ITS462\State.cs">
+      <Link>State.cs</Link>
+    </Compile>
     <Compile Include="frmClient.cs">
       <SubType>Form</SubType>
     </Compile>
