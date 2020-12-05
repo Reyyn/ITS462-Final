@@ -29,6 +29,9 @@ namespace Election2k20_Project_ITS462 {
         }
 
         private void cmbParty_SelectedIndexChanged(object sender, EventArgs e) {
+            cmbCandidate.Text = "";
+            cmbState.Text = "";
+
             db.OpenConnection();
             List<State> data = db.GetByParty(cmbParty.Text);
             dgvDisplay.DataSource = data;
@@ -36,6 +39,9 @@ namespace Election2k20_Project_ITS462 {
         }
 
         private void cmbCandidate_SelectedIndexChanged(object sender, EventArgs e) {
+            cmbParty.Text = "";
+            cmbState.Text = "";
+
             db.OpenConnection();
             List<State> data = db.GetByCandidate(cmbCandidate.Text);
             dgvDisplay.DataSource = data;
@@ -43,11 +49,43 @@ namespace Election2k20_Project_ITS462 {
         }
 
         private void cmbState_SelectedIndexChanged(object sender, EventArgs e) {
+            cmbCandidate.Text = "";
+            cmbParty.Text = "";
+
             db.OpenConnection();
             List<State> data = new List<State>();
             data.Add(db.GetByState(cmbState.Text));
             dgvDisplay.DataSource = data;
             db.CloseConnection();
+        }
+
+        private void btnFinal_Click(object sender, EventArgs e) {
+            cmbCandidate.Text = "";
+            cmbState.Text = "";
+            cmbParty.Text = "";
+
+            DataTable final = new DataTable();
+            
+            db.OpenConnection();
+            int t = db.GetVotes("Trump");
+            int b = db.GetVotes("Biden");
+            db.CloseConnection();
+            
+            final.Columns.Add("Candidate");
+            final.Columns.Add("Total Votes");
+            final.Columns.Add("Percentage");
+
+            float tf = (float)t / (float)(t + b);
+            float bf = (float)b / (float)(t + b);
+
+            final.Rows.Add("Trump", t, tf * 100);
+            final.Rows.Add("Biden", b, bf * 100);
+
+            dgvDisplay.DataSource = final;
+
+            var w = "";
+            if (t > b) w = "Trump"; else w = "Biden"; 
+            MessageBox.Show("The winner is " + w);
         }
     }
 }

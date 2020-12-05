@@ -31,6 +31,7 @@ namespace Election2k20_Project_ITS462 {
             this.label3 = new System.Windows.Forms.Label();
             this.cmbState = new System.Windows.Forms.ComboBox();
             this.dgvDisplay = new System.Windows.Forms.DataGridView();
+            this.btnFinal = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDisplay)).BeginInit();
             this.SuspendLayout();
             // 
@@ -99,11 +100,22 @@ namespace Election2k20_Project_ITS462 {
             this.dgvDisplay.Size = new System.Drawing.Size(543, 432);
             this.dgvDisplay.TabIndex = 6;
             // 
+            // btnFinal
+            // 
+            this.btnFinal.Location = new System.Drawing.Point(118, 125);
+            this.btnFinal.Name = "btnFinal";
+            this.btnFinal.Size = new System.Drawing.Size(121, 23);
+            this.btnFinal.TabIndex = 7;
+            this.btnFinal.Text = "Final Results";
+            this.btnFinal.UseVisualStyleBackColor = true;
+            this.btnFinal.Click += new System.EventHandler(this.btnFinal_Click);
+            // 
             // frmClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnFinal);
             this.Controls.Add(this.dgvDisplay);
             this.Controls.Add(this.cmbState);
             this.Controls.Add(this.label3);
@@ -128,5 +140,6 @@ namespace Election2k20_Project_ITS462 {
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmbState;
         private System.Windows.Forms.DataGridView dgvDisplay;
+        private System.Windows.Forms.Button btnFinal;
     }
 }

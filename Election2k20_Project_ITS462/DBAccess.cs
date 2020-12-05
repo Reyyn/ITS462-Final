@@ -62,6 +62,7 @@ namespace Election2k20_Project_ITS462 {
 						parties.Add(dr.GetString(0));
 				}
 			}
+			dr.Close();
 
 			return parties;
 		}
@@ -94,6 +95,7 @@ namespace Election2k20_Project_ITS462 {
 						candidates.Add(dr.GetString(0));
 				}
 			}
+			dr.Close();
 
 			return candidates;
 		}
@@ -114,6 +116,7 @@ namespace Election2k20_Project_ITS462 {
 					states.Add(dr.GetString(0));
                 }
             }
+			dr.Close();
 			
 			return states;
         }
@@ -137,7 +140,7 @@ namespace Election2k20_Project_ITS462 {
 		/// <param name="state">Name of the state.</param>
 		/// <returns>A <c>State</c> object containing the data. Returns null if no data was found.</returns>
 		public State GetByState(string state) {
-			string query = "SELECT * FROM Votes WHERE name='" + state + "'";
+			string query = "SELECT * FROM Votes WHERE state='" + state + "'";
 			
 			return GetState(query)[0]; // should be only one entry, so we'll just return the first object in the list
 		}
@@ -159,7 +162,7 @@ namespace Election2k20_Project_ITS462 {
 		/// <param name="state">Name of the candidate.</param>
 		/// <returns>A <c>State</c> object containing the data. Returns null if no data was found.</returns>
 		public List<State> GetByCandidate(string candidate) {
-			string query = "SELECT * FROM Votes WHERE party1='" + candidate + "' OR party2='" + candidate + "'";
+			string query = "SELECT * FROM Votes WHERE winner='" + candidate + "'";
 
 			return GetState(query);
 		}
@@ -184,16 +187,16 @@ namespace Election2k20_Project_ITS462 {
 				// Attempt to read the first returned row and populate a State object
 				try {
 					while (dr.Read()) {
-						s = new State(dr.GetString(0));
-						s.Winner = dr.GetString(1);
-						s.Candidate1 = dr.GetString(2);
-						s.Candidate2 = dr.GetString(3);
-						s.Party1 = dr.GetString(4);
-						s.Party2 = dr.GetString(5);
-						s.Votes1 = dr.GetInt32(6);
+						s = new State(dr.GetString(1));
+						s.Winner = dr.GetString(2);
+						s.Candidate1 = dr.GetString(3);
+						s.Candidate2 = dr.GetString(4);
+						s.Party1 = dr.GetString(5);
+						s.Party2 = dr.GetString(6);
 						s.Votes1 = dr.GetInt32(7);
-						s.Percent1 = dr.GetFloat(8);
-						s.Percent2 = dr.GetFloat(9);
+						s.Votes2 = dr.GetInt32(8);
+						s.Percent1 = dr.GetFloat(9);
+						s.Percent2 = dr.GetFloat(10);
 
 						data.Add(s);
 					}
@@ -201,12 +204,13 @@ namespace Election2k20_Project_ITS462 {
 				catch (Exception ex) {
 					s = null;
                 }
-
-				return data;
 			}
 			else {
-				return null;
+				data = null;
 			}
+			dr.Close();
+
+			return data;
 		}
 
 		/// <summary>
@@ -238,6 +242,7 @@ namespace Election2k20_Project_ITS462 {
 					}
                 }
             }
+			dr.Close();
 
 			return votes;
         }
