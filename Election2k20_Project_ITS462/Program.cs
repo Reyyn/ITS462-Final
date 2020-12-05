@@ -11,6 +11,7 @@ using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using SQLite;
 
 namespace Election2k20_Project_ITS462
 {
@@ -71,87 +72,137 @@ namespace Election2k20_Project_ITS462
         public static string USAPRESIDENT = "";
         public static int BidenFinalCount;
         public static int TrumpFinalcount;
+        public static bool statecount = false;
+        public static List<State> data = new List<State>();
         static void Main(string[] args)
         {
             Webscrapper();
-
-            /* TEST CODE FOR DBACCESS MODULE
+            while (statecount==false) {} ;
+            Console.WriteLine("all data stored=================");
+            setState(GADATA);
+            setState(ALDATA);
+            setState(AKDATA);
+            setState(AZDATA);
+            setState(ARDATA);
+            setState(CADATA);
+            setState(CODATA);
+            setState(CTDATA);
+            setState(DEDATA);
+            setState(FLDATA);
+            setState(HIDATA);
+            setState(IDDATA);
+            setState(ILDATA);
+            setState(INDATA);
+            setState(IADATA);
+            setState(KSDATA);
+            setState(KYDATA);
+            setState(LADATA);
+            setState(MEDATA);
+            setState(MDDATA);
+            setState(MADATA);
+            setState(MIDATA);
+            setState(MNDATA);
+            setState(MSDATA);
+            setState(MODATA);
+            setState(MTDATA);
+            setState(NEDATA);
+            setState(NVDATA);
+            setState(NHDATA);
+            setState(NJDATA);
+            setState(NMDATA);
+            setState(NYDATA);
+            setState(NCDATA);
+            setState(NDDATA);
+            setState(OHDATA);
+            setState(OKDATA);
+            setState(ORDATA);
+            setState(PADATA);
+            setState(RIDATA);
+            setState(SCDATA);
+            setState(SDDATA);
+            setState(TNDATA);
+            setState(TXDATA);
+            setState(UTDATA);
+            setState(VTDATA);
+            setState(VADATA);
+            setState(WashingtonDATA);
+            setState(WADATA);
+            setState(WestVirginiaDATA);
+            setState(WIDATA);
+            setState(WYDATA);
             DBAccess db = new DBAccess();
             db.OpenConnection();
-            State state = new State("TEST");
-            state.Candidate1 = "Carrot";
-            state.Candidate2 = "Potato";
-            state.Winner = "Turnip";
-            state.Party1 = "Mario";
-            state.Party2 = "Peach";
-            state.Votes1 = 1234;
-            state.Votes2 = 4321;
-            state.Percent1 = 30.0f;
-            state.Percent2 = 60.0f;
-            db.StoreVotes(state);
-            db.CloseConnection();*/
+            foreach (State item in data)
+            {
 
+                db.StoreVotes(item);
+            }
+            db.CloseConnection();
+
+     
             Console.ReadLine();
 
         }
         private static async Task Webscrapper() {
             await ParseData();
-            Console.WriteLine(BidenFinalCount + "==========" + TrumpFinalcount + "\n Result: " + USAPRESIDENT);
+            
+            //Console.WriteLine(BidenFinalCount + "==========" + TrumpFinalcount + "\n Result: " + USAPRESIDENT);
             //**********************************connect to database and insert data here in the Webscrapper******************************************
         }
         private static async Task ParseData() {
-            await GetHtmlAsyncGeorgia();
-            await GetHtmlAsyncAlabama();
-            await GetHtmlAsyncAlaska();
-            await GetHtmlAsyncArizona();
-            await GetHtmlAsyncArkansas();
-            await GetHtmlAsyncCalifornia();
-            await GetHtmlAsyncColorado();
-            await GetHtmlAsyncConnecticut();
-            await GetHtmlAsyncDelaware();
-            await GetHtmlAsyncFlorida();
-            await GetHtmlAsyncHawaii();
-            await GetHtmlAsyncIdaho();
-            await GetHtmlAsyncIllinois();
-            await GetHtmlAsyncIndiana();
-            await GetHtmlAsyncIowa();
-            await GetHtmlAsyncKansas();
-            await GetHtmlAsyncKentucky();
-            await GetHtmlAsyncLouisiana();
-            await GetHtmlAsyncMaine();
-            await GetHtmlAsyncMaryland();
-            await GetHtmlAsyncMassachusetts();
-            await GetHtmlAsyncMichigan();
-            await GetHtmlAsyncMinnesota();
-            await GetHtmlAsyncMississippi();
-            await GetHtmlAsyncMissouri();
-            await GetHtmlAsyncMontana();
-            await GetHtmlAsyncNebraska();
-            await GetHtmlAsyncNevada();
-            await GetHtmlAsyncNewHampshire();
-            await GetHtmlAsyncNewJersey();
-            await GetHtmlAsyncNewMexico();
-            await GetHtmlAsyncNewYork();
-            await GetHtmlAsyncNorthcarolina();
-            await GetHtmlAsyncNorthDakota();
-            await GetHtmlAsyncOhio();
-            await GetHtmlAsyncOklahoma();
-            await GetHtmlAsyncOregon();
-            await GetHtmlAsyncPennsylvania();
-            await GetHtmlAsyncRhodeIsland();
-            await GetHtmlAsyncSouthCarolina();
-            await GetHtmlAsyncSouthDakota();
-            await GetHtmlAsyncTennessee();
-            await GetHtmlAsyncTexas();
-            await GetHtmlAsyncUtah();
-            await GetHtmlAsyncVermont();
-            await GetHtmlAsyncVirginia();
-            await GetHtmlAsyncWashington();
-            await GetHtmlAsyncWashingtonDC();
-            await GetHtmlAsyncWestVirginia();
-            await GetHtmlAsyncwisconsin();
-            await GetHtmlAsyncwyoming();
+            //await GetHtmlAsyncGeorgia();
+            //await GetHtmlAsyncAlabama();
+            //await GetHtmlAsyncAlaska();
+            //await GetHtmlAsyncArizona();
+            //await GetHtmlAsyncArkansas();
+            //await GetHtmlAsyncCalifornia();
+            //await GetHtmlAsyncColorado();
+            //await GetHtmlAsyncConnecticut();
+            //await GetHtmlAsyncDelaware();
+            //await GetHtmlAsyncFlorida();
+            //await GetHtmlAsyncHawaii();
+            //await GetHtmlAsyncIdaho();
+            //await GetHtmlAsyncIllinois();
+            //await GetHtmlAsyncIndiana();
+            //await GetHtmlAsyncIowa();
+            //await GetHtmlAsyncKansas();
+            //await GetHtmlAsyncKentucky();
+            //await GetHtmlAsyncLouisiana();
+            //await GetHtmlAsyncMaine();
+            //await GetHtmlAsyncMaryland();
+            //await GetHtmlAsyncMassachusetts();
+            //await GetHtmlAsyncMichigan();
+            //await GetHtmlAsyncMinnesota();
+            //await GetHtmlAsyncMississippi();
+            //await GetHtmlAsyncMissouri();
+            //await GetHtmlAsyncMontana();
+            //await GetHtmlAsyncNebraska();
+            //await GetHtmlAsyncNevada();
+            //await GetHtmlAsyncNewHampshire();
+            //await GetHtmlAsyncNewJersey();
+            //await GetHtmlAsyncNewMexico();
+            //await GetHtmlAsyncNewYork();
+            //await GetHtmlAsyncNorthcarolina();
+            //await GetHtmlAsyncNorthDakota();
+            //await GetHtmlAsyncOhio();
+            //await GetHtmlAsyncOklahoma();
+            //await GetHtmlAsyncOregon();
+            //await GetHtmlAsyncPennsylvania();
+            //await GetHtmlAsyncRhodeIsland();
+            //await GetHtmlAsyncSouthCarolina();
+            //await GetHtmlAsyncSouthDakota();
+            //await GetHtmlAsyncTennessee();
+            //await GetHtmlAsyncTexas();
+            //await GetHtmlAsyncUtah();
+            //await GetHtmlAsyncVermont();
+            //await GetHtmlAsyncVirginia();
+            //await GetHtmlAsyncWashington();
+            //await GetHtmlAsyncWashingtonDC();
+            //await GetHtmlAsyncWestVirginia();
+            //await GetHtmlAsyncwisconsin();
+            //await GetHtmlAsyncwyoming();
             await FinalCount();
+            statecount = true;
         }
         private static async Task FinalCount() {
             var url = "https://www.politico.com/2020-election/results/president/";
@@ -175,30 +226,48 @@ namespace Election2k20_Project_ITS462
 
 
         }
+        //state, winnerName, candiate1,partyname1,partytotalvotes1,partypercntage1,candidate2,partyname2,partytotalvotes2,partypercntage2
+        public static void setState(string[] state)
+        {
+            State s = new State(state[0]);
+            
+            s.Winner = state[1];
+            s.Candidate1 = state[2];
+            s.Party1 = state[3];
+            s.Votes1 = int.Parse(state[4].ToString().Replace(",",""));
+            s.Percent1 = float.Parse(state[5]); 
+            s.Candidate2 = state[6];
+            s.Party2 = state[7];
+            s.Votes2 = int.Parse(state[8].ToString().Replace(",", "")); ;
+            s.Percent2 = float.Parse(state[9]);
+
+            data.Add(s);
+        }
         private static async Task GetHtmlAsyncGeorgia()
         {
             var url = "https://www.politico.com/2020-election/results/georgia/";
             var httpCilent = new HttpClient();
             var html = await httpCilent.GetStringAsync(url);
-            
             //Console.WriteLine(html.Result);
             // Console.Read();
             var htmlDoucment = new HtmlDocument();
             htmlDoucment.LoadHtml(html);
             var stateName = (htmlDoucment.DocumentNode.Descendants("h3").Where(node => node.GetAttributeValue("class", "").Equals("jsx-2658823684 ")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
-            var candidate_Row = htmlDoucment.DocumentNode.Descendants("tr").Where(node => node.GetAttributeValue("class", "").Equals("jsx-2677388595 candidate-row")).ToList();
-            // get candidate names 
-            var candidate_Name1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1912693590 name-only candidate-short-name")).FirstOrDefault().InnerText.Trim('\r','\n','\t', '*');
-            var candidate_Name2 = candidate_Row[1].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1912693590 name-only candidate-short-name")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            //var candidate_Row = htmlDoucment.DocumentNode.Descendants("tr").Where(node => node.GetAttributeValue("class", "").Equals("jsx-2677388595 candidate-row winner dem-winner")).ToList();
+            var candidate_Row2 = htmlDoucment.DocumentNode.Descendants("tr").Where(node => node.GetAttributeValue("class", "").Equals("jsx-2677388595 candidate-row")).ToList();
+            var candidate_Name1 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1912693590 name-only candidate-short-name")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var candidate_Name2 = candidate_Row2[1].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1912693590 name-only candidate-short-name")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
             // get party names
-            var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
-            var partyName2 = candidate_Row[1].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
+            var partyName1 = (candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
+            var partyName2 = candidate_Row2[1].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t','*');
-            var partyTotalVotes2 = candidate_Row[1].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[1].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row[1].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[1].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            // get candidate names 
+            
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -206,9 +275,8 @@ namespace Election2k20_Project_ITS462
             }
             else
             {
-                stateWinner = candidate_Name2;         
+                stateWinner = candidate_Name2;
             }
-
             //store the data in to tem. golbal array. 
             GADATA[0] = (string)stateName;
             GADATA[1] = (string)stateWinner;
@@ -220,6 +288,7 @@ namespace Election2k20_Project_ITS462
             GADATA[7] = (string)partyName2;
             GADATA[8] = (string)partyTotalVotes2;
             GADATA[9] = (string)partyPercentage2;
+            
             Console.WriteLine("=================================================================================================");
             Console.WriteLine("State Name: " + stateName + " Winner: "+ stateWinner+"\n");
             Console.WriteLine("Candidate Name: "+candidate_Name1 + "\nParty Name: "+partyName1);
@@ -248,11 +317,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -280,7 +349,7 @@ namespace Election2k20_Project_ITS462
             ALDATA[7] = (string)partyName2;
             ALDATA[8] = (string)partyTotalVotes2;
             ALDATA[9] = (string)partyPercentage2;
-
+            
         }
         private static async Task GetHtmlAsyncAlaska()
         {
@@ -292,19 +361,20 @@ namespace Election2k20_Project_ITS462
             var htmlDoucment = new HtmlDocument();
             htmlDoucment.LoadHtml(html);
             var stateName = (htmlDoucment.DocumentNode.Descendants("h3").Where(node => node.GetAttributeValue("class", "").Equals("jsx-2658823684 ")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
-            var candidate_Row = htmlDoucment.DocumentNode.Descendants("tr").Where(node => node.GetAttributeValue("class", "").Equals("jsx-2677388595 candidate-row")).ToList();
+            var candidate_Row = htmlDoucment.DocumentNode.Descendants("tr").Where(node => node.GetAttributeValue("class", "").Equals("jsx-2677388595 candidate-row winner gop-winner")).ToList();
+            var candidate_Row2 = htmlDoucment.DocumentNode.Descendants("tr").Where(node => node.GetAttributeValue("class", "").Equals("jsx-2677388595 candidate-row")).ToList();
             // get candidate names 
             var candidate_Name1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1912693590 name-only candidate-short-name")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var candidate_Name2 = candidate_Row[1].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1912693590 name-only candidate-short-name")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var candidate_Name2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1912693590 name-only candidate-short-name")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
             // get party names
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
-            var partyName2 = candidate_Row[1].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
+            var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row[1].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row[1].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -314,7 +384,6 @@ namespace Election2k20_Project_ITS462
             {
                 stateWinner = candidate_Name2;
             }
-
             Console.WriteLine("=================================================================================================");
             Console.WriteLine("State Name: " + stateName + " Winner: " + stateWinner + "\n");
             Console.WriteLine("Candidate Name: " + candidate_Name1 + "\nParty Name: " + partyName1);
@@ -353,11 +422,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -406,11 +475,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -458,11 +527,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -510,11 +579,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -562,11 +631,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -614,11 +683,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -666,11 +735,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -718,11 +787,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -770,11 +839,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -822,11 +891,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -874,11 +943,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -926,11 +995,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -978,11 +1047,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -1031,11 +1100,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -1084,11 +1153,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -1136,11 +1205,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -1189,11 +1258,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -1242,11 +1311,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -1294,11 +1363,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -1347,11 +1416,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -1399,11 +1468,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -1451,11 +1520,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -1503,11 +1572,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -1555,11 +1624,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -1607,11 +1676,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -1659,11 +1728,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -1711,11 +1780,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -1763,11 +1832,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -1815,11 +1884,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -1866,11 +1935,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row[1].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row[1].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row[1].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row[1].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row[1].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -1920,11 +1989,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -1972,11 +2041,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -2024,11 +2093,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -2076,11 +2145,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -2128,11 +2197,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -2180,11 +2249,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -2232,11 +2301,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -2284,11 +2353,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -2336,11 +2405,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -2388,11 +2457,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -2440,11 +2509,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -2492,11 +2561,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -2544,11 +2613,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -2596,11 +2665,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -2648,11 +2717,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -2700,11 +2769,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -2752,11 +2821,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
@@ -2804,11 +2873,11 @@ namespace Election2k20_Project_ITS462
             var partyName1 = (candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label gop")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper());
             var partyName2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("jsx-1420258095 party-label dem")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*').ToUpper();
             //get total votes 
-            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyTotalVotes1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
+            var partyTotalVotes2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-votes-next-to-percent jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*',',');
             //get Percentage Votes
-            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
-            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*');
+            var partyPercentage1 = candidate_Row[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
+            var partyPercentage2 = candidate_Row2[0].Descendants("div").Where(node => node.GetAttributeValue("class", "").Equals("candidate-percent-only jsx-3830922081")).FirstOrDefault().InnerText.Trim('\r', '\n', '\t', '*','%');
             var stateWinner = "";
             if (decimal.Parse(partyPercentage1.Trim('%')) >= decimal.Parse(partyPercentage2.Trim('%')))
             {
