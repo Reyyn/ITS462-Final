@@ -8,7 +8,7 @@
  * but as it is nonsensitive, and localy stored for the user, this will not be fixed.
  */
 using System;
-using System.Globalization;
+using System.Collections.Generic;
 using Microsoft.Data.Sqlite;
 
 namespace Election2k20_Project_ITS462 {
@@ -35,6 +35,93 @@ namespace Election2k20_Project_ITS462 {
 		}
 
 		/// <summary>
+		/// Gets the list of parties from the project database.
+		/// </summary>
+		/// <returns>a <c>List<string></c> containing the parties.</returns>
+		public List<string> GetParties() {
+			string command = "SELECT DISTINCT party1 FROM Votes";
+			string command2 = "SELECT DISTINCT party2 FROM Votes";
+
+			Cmd.CommandText = command;
+			SqliteDataReader dr = Cmd.ExecuteReader();
+
+			List<string> parties = new List<string>();
+			if (dr.HasRows) {
+				while (dr.Read()) {
+					if (!parties.Contains(dr.GetString(0)))
+						parties.Add(dr.GetString(0));
+                }
+            }
+			dr.Close();
+
+			Cmd.CommandText = command2;
+			dr = Cmd.ExecuteReader();
+			if (dr.HasRows) {
+				while (dr.Read()) {
+					if (!parties.Contains(dr.GetString(0)))
+						parties.Add(dr.GetString(0));
+				}
+			}
+			dr.Close();
+
+			return parties;
+		}
+
+		/// <summary>
+		/// Gets the list of candidates from the project database.
+		/// </summary>
+		/// <returns>a <c>List<string></c> containing the candidates.</returns>
+		public List<string> GetCandidates() {
+			string command = "SELECT DISTINCT candidate1 FROM Votes";
+			string command2 = "SELECT DISTINCT candidate2 FROM Votes";
+
+			Cmd.CommandText = command;
+			SqliteDataReader dr = Cmd.ExecuteReader();
+
+			List<string> candidates = new List<string>();
+			if (dr.HasRows) {
+				while (dr.Read()) {
+					if (!candidates.Contains(dr.GetString(0)))
+						candidates.Add(dr.GetString(0));
+				}
+			}
+			dr.Close();
+
+			Cmd.CommandText = command2;
+			dr = Cmd.ExecuteReader();
+			if (dr.HasRows) {
+				while (dr.Read()) {
+					if (!candidates.Contains(dr.GetString(0)))
+						candidates.Add(dr.GetString(0));
+				}
+			}
+			dr.Close();
+
+			return candidates;
+		}
+
+		/// <summary>
+		/// Gets the list of states from the project database.
+		/// </summary>
+		/// <returns>a <c>List<string></c> containing the states.</returns>
+		public List<string> GetStates() {
+			string command = "SELECT DISTINCT state FROM Votes";
+
+			Cmd.CommandText = command;
+			SqliteDataReader dr = Cmd.ExecuteReader();
+
+			List<string> states = new List<string>();
+			if (dr.HasRows) {
+				while (dr.Read()) {
+					states.Add(dr.GetString(0));
+                }
+            }
+			dr.Close();
+			
+			return states;
+        }
+
+		/// <summary>
 		/// Store the vote information for a state into the database.
 		/// </summary>
 		/// <param name="state">State object containing the vote information.</param>
@@ -52,38 +139,78 @@ namespace Election2k20_Project_ITS462 {
 		/// </summary>
 		/// <param name="state">Name of the state.</param>
 		/// <returns>A <c>State</c> object containing the data. Returns null if no data was found.</returns>
-		public State GetState(string state) {
-			string command = "SELECT * FROM Votes WHERE name='" + state + "'";
+		public State GetByState(string state) {
+			string query = "SELECT * FROM Votes WHERE state='" + state + "'";
+			
+			return GetState(query)[0]; // should be only one entry, so we'll just return the first object in the list
+		}
+
+		/// <summary>
+		/// Retrieve the data from a party.
+		/// </summary>
+		/// <param name="state">Name of the party.</param>
+		/// <returns>A <c>State</c> object containing the data. Returns null if no data was found.</returns>
+		public List<State> GetByParty(string party) {
+			string query = "SELECT * FROM Votes WHERE party1='" + party + "' OR party2='" + party + "'";
+
+			return GetState(query);
+		}
+
+		/// <summary>
+		/// Retrieve the data for a candidate.
+		/// </summary>
+		/// <param name="state">Name of the candidate.</param>
+		/// <returns>A <c>State</c> object containing the data. Returns null if no data was found.</returns>
+		public List<State> GetByCandidate(string candidate) {
+			string query = "SELECT * FROM Votes WHERE winner='" + candidate + "'";
+
+			return GetState(query);
+		}
+
+
+		/// <summary>
+		/// Retrieve the data from a state.
+		/// </summary>
+		/// <param name="state">SQL query.</param>
+		/// <returns>A <c>List<State></c> object containing the data. Returns null if no data was found.</returns>
+		private List<State> GetState(string query) {
+			string command = query;
 
 			Cmd.CommandText = command;
 			SqliteDataReader dr = Cmd.ExecuteReader();
+
+			List<State> data = new List<State>();
 
 			// If the query returned rows
 			if (dr.HasRows) {
 				State s;
 				// Attempt to read the first returned row and populate a State object
 				try {
-					dr.Read();
-					s = new State(dr.GetString(0));
-					s.Winner = dr.GetString(1);
-					s.Candidate1 = dr.GetString(2);
-					s.Candidate2 = dr.GetString(3);
-					s.Party1 = dr.GetString(4);
-					s.Party2 = dr.GetString(5);
-					s.Votes1 = dr.GetInt32(6);
-					s.Votes1 = dr.GetInt32(7);
-					s.Percent1 = dr.GetFloat(8);
-					s.Percent1 = dr.GetFloat(9);
+					while (dr.Read()) {
+						s = new State(dr.GetString(1));
+						s.Winner = dr.GetString(2);
+						s.Candidate1 = dr.GetString(3);
+						s.Candidate2 = dr.GetString(4);
+						s.Party1 = dr.GetString(5);
+						s.Party2 = dr.GetString(6);
+						s.Votes1 = dr.GetInt32(7);
+						s.Votes2 = dr.GetInt32(8);
+						s.Percent1 = dr.GetFloat(9);
+						s.Percent2 = dr.GetFloat(10);
+
+						data.Add(s);
+					}
 				}
 				catch (Exception ex) {
 					s = null;
                 }
-
-				return s;
 			}
 			else {
-				return null;
+				data = null;
 			}
+			dr.Close();
+
+			return data;
 		}
 
 		/// <summary>
@@ -115,6 +242,7 @@ namespace Election2k20_Project_ITS462 {
 					}
                 }
             }
+			dr.Close();
 
 			return votes;
         }
