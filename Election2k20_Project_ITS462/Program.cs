@@ -1,4 +1,4 @@
-﻿/* PNW ITS462 
+/* PNW ITS462 
  * Fall 2020
  * Final Project
  * Yash Patel 
@@ -150,57 +150,57 @@ namespace Election2k20_Project_ITS462
             //**********************************connect to database and insert data here in the Webscrapper******************************************
         }
         private static async Task ParseData() {
-            //await GetHtmlAsyncGeorgia();
-            //await GetHtmlAsyncAlabama();
-            //await GetHtmlAsyncAlaska();
-            //await GetHtmlAsyncArizona();
-            //await GetHtmlAsyncArkansas();
-            //await GetHtmlAsyncCalifornia();
-            //await GetHtmlAsyncColorado();
-            //await GetHtmlAsyncConnecticut();
-            //await GetHtmlAsyncDelaware();
-            //await GetHtmlAsyncFlorida();
-            //await GetHtmlAsyncHawaii();
-            //await GetHtmlAsyncIdaho();
-            //await GetHtmlAsyncIllinois();
-            //await GetHtmlAsyncIndiana();
-            //await GetHtmlAsyncIowa();
-            //await GetHtmlAsyncKansas();
-            //await GetHtmlAsyncKentucky();
-            //await GetHtmlAsyncLouisiana();
-            //await GetHtmlAsyncMaine();
-            //await GetHtmlAsyncMaryland();
-            //await GetHtmlAsyncMassachusetts();
-            //await GetHtmlAsyncMichigan();
-            //await GetHtmlAsyncMinnesota();
-            //await GetHtmlAsyncMississippi();
-            //await GetHtmlAsyncMissouri();
-            //await GetHtmlAsyncMontana();
-            //await GetHtmlAsyncNebraska();
-            //await GetHtmlAsyncNevada();
-            //await GetHtmlAsyncNewHampshire();
-            //await GetHtmlAsyncNewJersey();
-            //await GetHtmlAsyncNewMexico();
-            //await GetHtmlAsyncNewYork();
-            //await GetHtmlAsyncNorthcarolina();
-            //await GetHtmlAsyncNorthDakota();
-            //await GetHtmlAsyncOhio();
-            //await GetHtmlAsyncOklahoma();
-            //await GetHtmlAsyncOregon();
-            //await GetHtmlAsyncPennsylvania();
-            //await GetHtmlAsyncRhodeIsland();
-            //await GetHtmlAsyncSouthCarolina();
-            //await GetHtmlAsyncSouthDakota();
-            //await GetHtmlAsyncTennessee();
-            //await GetHtmlAsyncTexas();
-            //await GetHtmlAsyncUtah();
-            //await GetHtmlAsyncVermont();
-            //await GetHtmlAsyncVirginia();
-            //await GetHtmlAsyncWashington();
-            //await GetHtmlAsyncWashingtonDC();
-            //await GetHtmlAsyncWestVirginia();
-            //await GetHtmlAsyncwisconsin();
-            //await GetHtmlAsyncwyoming();
+            await GetHtmlAsyncGeorgia();
+            await GetHtmlAsyncAlabama();
+            await GetHtmlAsyncAlaska();
+            await GetHtmlAsyncArizona();
+            await GetHtmlAsyncArkansas();
+            await GetHtmlAsyncCalifornia();
+            await GetHtmlAsyncColorado();
+            await GetHtmlAsyncConnecticut();
+            await GetHtmlAsyncDelaware();
+            await GetHtmlAsyncFlorida();
+            await GetHtmlAsyncHawaii();
+            await GetHtmlAsyncIdaho();
+            await GetHtmlAsyncIllinois();
+            await GetHtmlAsyncIndiana();
+            await GetHtmlAsyncIowa();
+            await GetHtmlAsyncKansas();
+            await GetHtmlAsyncKentucky();
+            await GetHtmlAsyncLouisiana();
+            await GetHtmlAsyncMaine();
+            await GetHtmlAsyncMaryland();
+            await GetHtmlAsyncMassachusetts();
+            await GetHtmlAsyncMichigan();
+            await GetHtmlAsyncMinnesota();
+            await GetHtmlAsyncMississippi();
+            await GetHtmlAsyncMissouri();
+            await GetHtmlAsyncMontana();
+            await GetHtmlAsyncNebraska();
+            await GetHtmlAsyncNevada();
+            await GetHtmlAsyncNewHampshire();
+            await GetHtmlAsyncNewJersey();
+            await GetHtmlAsyncNewMexico();
+            await GetHtmlAsyncNewYork();
+            await GetHtmlAsyncNorthcarolina();
+            await GetHtmlAsyncNorthDakota();
+            await GetHtmlAsyncOhio();
+            await GetHtmlAsyncOklahoma();
+            await GetHtmlAsyncOregon();
+            await GetHtmlAsyncPennsylvania();
+            await GetHtmlAsyncRhodeIsland();
+            await GetHtmlAsyncSouthCarolina();
+            await GetHtmlAsyncSouthDakota();
+            await GetHtmlAsyncTennessee();
+            await GetHtmlAsyncTexas();
+            await GetHtmlAsyncUtah();
+            await GetHtmlAsyncVermont();
+            await GetHtmlAsyncVirginia();
+            await GetHtmlAsyncWashington();
+            await GetHtmlAsyncWashingtonDC();
+            await GetHtmlAsyncWestVirginia();
+            await GetHtmlAsyncwisconsin();
+            await GetHtmlAsyncwyoming();
             await FinalCount();
             statecount = true;
         }
@@ -238,7 +238,7 @@ namespace Election2k20_Project_ITS462
             s.Percent1 = float.Parse(state[5]); 
             s.Candidate2 = state[6];
             s.Party2 = state[7];
-            s.Votes2 = int.Parse(state[8].ToString().Replace(",", "")); ;
+            s.Votes2 = int.Parse(state[8].ToString().Replace(",", "")); 
             s.Percent2 = float.Parse(state[9]);
 
             data.Add(s);
@@ -745,8 +745,29 @@ namespace Election2k20_Project_ITS462
             {
                 stateWinner = candidate_Name1;
             }
-        }
+            else
+            {
+                stateWinner = candidate_Name2;
+            }
+            Console.WriteLine("=================================================================================================");
+            Console.WriteLine("State Name: " + stateName + " Winner: " + stateWinner + "\n");
+            Console.WriteLine("Candidate Name: " + candidate_Name1 + "\nParty Name: " + partyName1);
+            Console.WriteLine("Total Votes: " + partyTotalVotes1 + "\nPercentage " + partyPercentage1 + "\n");
 
+            Console.WriteLine("Candidate Name: " + candidate_Name2 + "\nParty Name: " + partyName2);
+            Console.WriteLine("Total Votes: " + partyTotalVotes2 + "\nPercentage " + partyPercentage2);
+            Console.WriteLine("=================================================================================================");
+            FLDATA[0] = (string)stateName;
+            FLDATA[1] = (string)stateWinner;
+            FLDATA[2] = (string)candidate_Name1;
+            FLDATA[3] = (string)partyName1;
+            FLDATA[4] = (string)partyTotalVotes1;
+            FLDATA[5] = (string)partyPercentage1;
+            FLDATA[6] = (string)candidate_Name2;
+            FLDATA[7] = (string)partyName2;
+            FLDATA[8] = (string)partyTotalVotes2;
+            FLDATA[9] = (string)partyPercentage2;
+        }
         private static async Task GetHtmlAsyncHawaii()
         {
             var url = "https://www.politico.com/2020-election/results/hawaii/";
@@ -889,7 +910,19 @@ namespace Election2k20_Project_ITS462
             Console.WriteLine("Candidate Name: " + candidate_Name1 + "\nParty Name: " + partyName1);
             Console.WriteLine("Total Votes: " + partyTotalVotes1 + "\nPercentage " + partyPercentage1 + "\n");
 
-            
+            Console.WriteLine("Candidate Name: " + candidate_Name2 + "\nParty Name: " + partyName2);
+            Console.WriteLine("Total Votes: " + partyTotalVotes2 + "\nPercentage " + partyPercentage2);
+            Console.WriteLine("=================================================================================================");
+            ILDATA[0] = (string)stateName;
+            ILDATA[1] = (string)stateWinner;
+            ILDATA[2] = (string)candidate_Name1;
+            ILDATA[3] = (string)partyName1;
+            ILDATA[4] = (string)partyTotalVotes1;
+            ILDATA[5] = (string)partyPercentage1;
+            ILDATA[6] = (string)candidate_Name2;
+            ILDATA[7] = (string)partyName2;
+            ILDATA[8] = (string)partyTotalVotes2;
+            ILDATA[9] = (string)partyPercentage2;
         }
         private static async Task GetHtmlAsyncIndiana()
         {
@@ -1081,7 +1114,6 @@ namespace Election2k20_Project_ITS462
             {
                 stateWinner = candidate_Name2;
             }
-
             Console.WriteLine("=================================================================================================");
             Console.WriteLine("State Name: " + stateName + " Winner: " + stateWinner + "\n");
             Console.WriteLine("Candidate Name: " + candidate_Name1 + "\nParty Name: " + partyName1);
@@ -1090,7 +1122,6 @@ namespace Election2k20_Project_ITS462
             Console.WriteLine("Candidate Name: " + candidate_Name2 + "\nParty Name: " + partyName2);
             Console.WriteLine("Total Votes: " + partyTotalVotes2 + "\nPercentage " + partyPercentage2);
             Console.WriteLine("=================================================================================================");
-
             KYDATA[0] = (string)stateName;
             KYDATA[1] = (string)stateWinner;
             KYDATA[2] = (string)candidate_Name1;
@@ -1193,8 +1224,19 @@ namespace Election2k20_Project_ITS462
             Console.WriteLine("Candidate Name: " + candidate_Name1 + "\nParty Name: " + partyName1);
             Console.WriteLine("Total Votes: " + partyTotalVotes1 + "\nPercentage " + partyPercentage1 + "\n");
 
-          
-            data.Add(s);
+            Console.WriteLine("Candidate Name: " + candidate_Name2 + "\nParty Name: " + partyName2);
+            Console.WriteLine("Total Votes: " + partyTotalVotes2 + "\nPercentage " + partyPercentage2);
+            Console.WriteLine("=================================================================================================");
+            MEDATA[0] = (string)stateName;
+            MEDATA[1] = (string)stateWinner;
+            MEDATA[2] = (string)candidate_Name1;
+            MEDATA[3] = (string)partyName1;
+            MEDATA[4] = (string)partyTotalVotes1;
+            MEDATA[5] = (string)partyPercentage1;
+            MEDATA[6] = (string)candidate_Name2;
+            MEDATA[7] = (string)partyName2;
+            MEDATA[8] = (string)partyTotalVotes2;
+            MEDATA[9] = (string)partyPercentage2;
         }
        
         private static async Task GetHtmlAsyncMaryland()
@@ -1238,7 +1280,6 @@ namespace Election2k20_Project_ITS462
             Console.WriteLine("Candidate Name: " + candidate_Name2 + "\nParty Name: " + partyName2);
             Console.WriteLine("Total Votes: " + partyTotalVotes2 + "\nPercentage " + partyPercentage2);
             Console.WriteLine("=================================================================================================");
-
             MDDATA[0] = (string)stateName;
             MDDATA[1] = (string)stateWinner;
             MDDATA[2] = (string)candidate_Name1;
@@ -1341,10 +1382,20 @@ namespace Election2k20_Project_ITS462
             Console.WriteLine("Candidate Name: " + candidate_Name1 + "\nParty Name: " + partyName1);
             Console.WriteLine("Total Votes: " + partyTotalVotes1 + "\nPercentage " + partyPercentage1 + "\n");
 
-
-            data.Add(s);
+            Console.WriteLine("Candidate Name: " + candidate_Name2 + "\nParty Name: " + partyName2);
+            Console.WriteLine("Total Votes: " + partyTotalVotes2 + "\nPercentage " + partyPercentage2);
+            Console.WriteLine("=================================================================================================");
+            MIDATA[0] = (string)stateName;
+            MIDATA[1] = (string)stateWinner;
+            MIDATA[2] = (string)candidate_Name1;
+            MIDATA[3] = (string)partyName1;
+            MIDATA[4] = (string)partyTotalVotes1;
+            MIDATA[5] = (string)partyPercentage1;
+            MIDATA[6] = (string)candidate_Name2;
+            MIDATA[7] = (string)partyName2;
+            MIDATA[8] = (string)partyTotalVotes2;
+            MIDATA[9] = (string)partyPercentage2;
         }
-
         
         private static async Task GetHtmlAsyncMinnesota()
         {
@@ -1379,7 +1430,6 @@ namespace Election2k20_Project_ITS462
             {
                 stateWinner = candidate_Name2;
             }
-
             Console.WriteLine("=================================================================================================");
             Console.WriteLine("State Name: " + stateName + " Winner: " + stateWinner + "\n");
             Console.WriteLine("Candidate Name: " + candidate_Name1 + "\nParty Name: " + partyName1);
@@ -1388,7 +1438,6 @@ namespace Election2k20_Project_ITS462
             Console.WriteLine("Candidate Name: " + candidate_Name2 + "\nParty Name: " + partyName2);
             Console.WriteLine("Total Votes: " + partyTotalVotes2 + "\nPercentage " + partyPercentage2);
             Console.WriteLine("=================================================================================================");
-
             MNDATA[0] = (string)stateName;
             MNDATA[1] = (string)stateWinner;
             MNDATA[2] = (string)candidate_Name1;
@@ -1490,9 +1539,20 @@ namespace Election2k20_Project_ITS462
             Console.WriteLine("Candidate Name: " + candidate_Name1 + "\nParty Name: " + partyName1);
             Console.WriteLine("Total Votes: " + partyTotalVotes1 + "\nPercentage " + partyPercentage1 + "\n");
 
-            data.Add(s);
+            Console.WriteLine("Candidate Name: " + candidate_Name2 + "\nParty Name: " + partyName2);
+            Console.WriteLine("Total Votes: " + partyTotalVotes2 + "\nPercentage " + partyPercentage2);
+            Console.WriteLine("=================================================================================================");
+            MODATA[0] = (string)stateName;
+            MODATA[1] = (string)stateWinner;
+            MODATA[2] = (string)candidate_Name1;
+            MODATA[3] = (string)partyName1;
+            MODATA[4] = (string)partyTotalVotes1;
+            MODATA[5] = (string)partyPercentage1;
+            MODATA[6] = (string)candidate_Name2;
+            MODATA[7] = (string)partyName2;
+            MODATA[8] = (string)partyTotalVotes2;
+            MODATA[9] = (string)partyPercentage2;
         }
-
         private static async Task GetHtmlAsyncMontana()
         {
             var url = "https://www.politico.com/2020-election/results/montana/";
@@ -2846,5 +2906,6 @@ namespace Election2k20_Project_ITS462
             WYDATA[8] = (string)partyTotalVotes2;
             WYDATA[9] = (string)partyPercentage2;
         }
+
     }
 }
